@@ -1,0 +1,32 @@
+.select-container {
+  width: 325px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 8px 0 rgba(29,33,41,0.3);
+  z-index: 999;
+  position: absolute;
+  color: #1D2129;
+
+  &__header {
+
+  }
+
+  &__body {
+    border-top: 1px solid #caccd1;
+    padding: 20px 30px;
+    height: 200px;
+    overflow-y: scroll;
+  }
+
+  &__footer {
+    background: #F3F4F7;
+    color: #1D2129;
+    height: 50px;
+    border-top: 1px solid #caccd1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    bottom: 0;
+    padding: 0 10px;
+  }
+}

@@ -119,6 +119,41 @@
           }
         }
       }
+    },
+    "cm-select": {
+      "projectType": "library",
+      "root": "projects/cm-select",
+      "sourceRoot": "projects/cm-select/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/cm-select/tsconfig.lib.json",
+            "project": "projects/cm-select/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/cm-select/src/test.ts",
+            "tsConfig": "projects/cm-select/tsconfig.spec.json",
+            "karmaConfig": "projects/cm-select/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/cm-select/tsconfig.lib.json",
+              "projects/cm-select/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "cm-select-app"
 }

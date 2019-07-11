@@ -1,0 +1,19 @@
+<div class="checkbox-container select-container">
+  <div class="p-3 filter-bar select-container__header" *ngIf="options.filter">
+    <input class="mr-2 search-input" type="text" [(ngModel)]="search" placeholder="Search">
+  </div>
+  <div class="p-3 checkbox-content select-container__body">
+    <ng-container *ngFor="let item of items | filter: {field: bindLabel, value: search}; let i = index;">
+      <div class="checkbox-option pr-5 p-1">
+        <input class="aiesec-checkbox mr-2" type="checkbox" [id]="item.id" [(ngModel)]="item.checked">
+        <img class="checkbox-image" [src]="item[options.imageUrlKey]" alt="{{item[bindLabel]}} image" *ngIf="options.image">
+        <label class="checbox-label" [for]="item.id">{{ item[bindLabel] }}</label>
+      </div>
+    </ng-container>
+  </div>
+  <div class="p-3 select-container__footer">
+    <button class="btn-clear" (click)="clearSelections()">Clear</button>
+    <button class="btn-clear" (click)="applySelections()">Apply</button>
+  </div>
+</div>
+  
