@@ -8,14 +8,14 @@
   color: #1D2129;
 
   &__header {
-
+    padding: 0 24px;
   }
 
   &__body {
     border-top: 1px solid #caccd1;
-    padding: 20px 30px;
     height: 200px;
     overflow-y: scroll;
+    padding: 0 24px;
   }
 
   &__footer {
@@ -27,6 +27,6 @@
     align-items: center;
     justify-content: flex-end;
     bottom: 0;
-    padding: 0 10px;
+    padding: 0 24px;
   }
 }

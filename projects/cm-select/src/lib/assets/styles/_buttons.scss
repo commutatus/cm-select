@@ -1,0 +1,61 @@
+.app-btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 24px;
+  padding: 8px 16px;
+  text-align: center;
+  transition-duration: 0.2s;
+
+  &.primary {
+    background-color: #008080;
+    color: #FFFFFF;
+
+    &:hover {
+      background-color: darken(#008080, 5%);
+    }
+  }
+
+  &.secondary {
+    background-color: #DE851D;
+    color: #FFFFFF;
+
+    &:hover {
+      background-color: darken(#DE851D, 5%);
+    }
+  }
+
+  &.outline {
+    background-color: #FFFFFF;
+    border: 1px solid #caccd1;
+    color: #1D2129;
+
+    &:hover {
+      background-color: darken(#FFFFFF, 5%);
+    }
+  }
+
+  &.transparent {
+    background-color: transparent;
+    border: none;
+    color: #1D2129;
+
+    &:hover {
+      background-color: darken(#FFFFFF, 5%);
+    }
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    background-color: rgba(29, 33, 41, 0.2);;
+    color: #fff;
+  }
+}

@@ -1,3 +1,26 @@
 @import "../assets/styles/index";
 
+.checkbox-container {
+  .select-container__header {
+    display: flex;
+    height: 30px;
 
+    .search-input {
+      border: none;
+      width: 100%;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  
+  .select-container__body {
+    .checkbox-option {
+      text-align: left;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      margin: 18px 0;
+    }
+  }
+}

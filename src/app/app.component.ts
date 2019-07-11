@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   items: any[];
   title = 'cm-select-app';
-  showCheckbox: boolean;
+  showCheckbox = true;
   selected: any[];
   selectedIds: number[];
 
