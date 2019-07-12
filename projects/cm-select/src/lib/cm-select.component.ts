@@ -3,7 +3,7 @@ import { ItemType } from './models/classes';
 import { Options } from './models/classes';
 
 @Component({
-  selector: 'lib-cm-select',
+  selector: 'cm-select',
   templateUrl: './cm-select.component.html',
   styles: []
 })

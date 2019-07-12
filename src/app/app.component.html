@@ -4,9 +4,9 @@
     Welcome to {{ title }}!
   </h1>
   <button (click)="showCheckbox = !showCheckbox">Toggle Checkbox</button>
-<lib-cm-select *ngIf="showCheckbox" [items]="items" [selected]="selected" [selectedIds]="selectedIds"
+<cm-select *ngIf="showCheckbox" [items]="items" [selected]="selected" [selectedIds]="selectedIds"
 [options]="{'filter': true}"
 (changed)="onChange($event)" (idsChanged)="onIdsChanged($event)">
-</lib-cm-select>
+</cm-select>
 </div>
 

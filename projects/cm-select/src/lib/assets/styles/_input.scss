@@ -24,8 +24,9 @@ input.app-checkbox[type='checkbox'] {
 
   &:checked:after {
     background: #1D2129;
-    content: "\e945";
+    content: "✓";
     color: #fff;
     border: none;
+    font-size: 14px;
   }
 }

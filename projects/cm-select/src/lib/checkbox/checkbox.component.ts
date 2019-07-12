@@ -4,7 +4,7 @@ import { Options } from '../models/classes';
 import { deepCopyArray } from '../utils/helpers';
 
 @Component({
-  selector: 'lib-checkbox',
+  selector: 'cm-select-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss']
 })
