@@ -19,6 +19,8 @@ export class CheckboxComponent implements OnInit  {
   @Output() changed: EventEmitter<ItemType[]> = new EventEmitter();
   @Output() idsChanged: EventEmitter<number[]> = new EventEmitter();
 
+  search = '';
+
   constructor() {
    }
 

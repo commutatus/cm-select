@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { CmSelectModule } from 'projects/cm-select/src/public-api';
+import { CmSelectModule } from 'projects/cm-select/src/public_api';
 
 @NgModule({
   declarations: [

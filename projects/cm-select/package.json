@@ -1,8 +1,14 @@
 {
   "name": "cm-select",
   "version": "0.0.1",
+  "scripts": {
+    "build": "ng-packagr -p package.json"
+  },
   "peerDependencies": {
     "@angular/common": "^8.1.0",
     "@angular/core": "^8.1.0"
+  },
+  "devDependencies": {
+    "ng-packagr": "^5.3.0"
   }
 }
