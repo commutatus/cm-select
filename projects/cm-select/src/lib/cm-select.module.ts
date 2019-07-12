@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CmSelectComponent } from './cm-select.component';
 import { CheckboxModule } from './checkbox/checkbox.module';
+import { CmSelectService } from './cm-select.service';
 
 
 
@@ -8,6 +9,9 @@ import { CheckboxModule } from './checkbox/checkbox.module';
   declarations: [CmSelectComponent],
   imports: [
     CheckboxModule,
+  ],
+  providers: [
+    CmSelectService,
   ],
   exports: [CmSelectComponent]
 })
