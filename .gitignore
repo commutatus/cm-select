@@ -44,3 +44,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Lib Files
+/projects/cm-select/dist
+/projects/cm-select/node_modules
