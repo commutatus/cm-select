@@ -3,11 +3,14 @@
 .checkbox-container {
   .select-container__header {
     display: flex;
-    height: 30px;
+    background-color: #F3F4F7;
+    padding: 14px 24px;
 
     .search-input {
       border: none;
       width: 100%;
+      background-color: transparent;
+
       &:focus {
         outline: none;
       }
@@ -20,7 +23,7 @@
       font-size: 14px;
       display: flex;
       align-items: center;
-      margin: 18px 0;
+      margin: 16px 0;
     }
   }
 }
