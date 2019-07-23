@@ -1,4 +1,4 @@
-<div class="checkbox-container select-container">
+<div class="checkbox-container select-container" [style.top.px]="options.top">
   <div class="select-container__header" *ngIf="options.filter">
     <input class="search-input" type="text" [(ngModel)]="search" placeholder="Search">
   </div>
@@ -6,7 +6,7 @@
     <ng-container *ngFor="let item of items | filter: {field: bindLabel, value: search}; let i = index;">
       <div class="checkbox-option">
         <input class="app-checkbox mr10" type="checkbox" [id]="item.id" [(ngModel)]="item.checked">
-        <img class="checkbox-image" [src]="item[options.imageUrlKey]" alt="{{item[bindLabel]}} image" *ngIf="options.image">
+        <img class="checkbox-image" [src]="item[options.imageUrlKey]" [alt]="item[bindLabel] + ' image'" *ngIf="options.image">
         <label class="checbox-label" [for]="item.id">{{ item[bindLabel] }}</label>
       </div>
     </ng-container>
