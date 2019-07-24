@@ -15,7 +15,7 @@ export class Options {
 }
 
 export class ItemType {
-  id: number;
+  id: number | string;
   value?: string;
   name: string;
   text?: string;
