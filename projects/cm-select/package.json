@@ -2,7 +2,8 @@
   "name": "cm-select",
   "version": "0.0.8",
   "scripts": {
-    "build": "ng-packagr -p package.json"
+    "build": "ng-packagr -p package.json",
+    "postbuild": "cd dist && npm publish"
   },
   "peerDependencies": {
     "@angular/common": "^8.1.0",
