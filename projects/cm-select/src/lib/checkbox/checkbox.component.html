@@ -1,4 +1,4 @@
-<div class="checkbox-container select-container">
+<div class="checkbox-container select-container" [style.top.px]="options.top">
   <div class="select-container__header" *ngIf="options.filter">
     <input class="search-input" type="text" [(ngModel)]="search" placeholder="Search">
   </div>
@@ -11,7 +11,7 @@
         <ng-container *ngIf="!options.single">
             <input class="app-checkbox mr10" type="checkbox" [id]="item.id" [(ngModel)]="item.checked">
         </ng-container>
-        <img class="checkbox-image" [src]="item[options.imageUrlKey]" alt="{{item[bindLabel]}} image" *ngIf="options.image">
+        <img class="checkbox-image" [src]="item[options.imageUrlKey]" [alt]="item[bindLabel] + ' image'" *ngIf="options.image">
         <label class="checbox-label" [for]="item.id">{{ item[bindLabel] }}</label>
       </div>
     </ng-container>
