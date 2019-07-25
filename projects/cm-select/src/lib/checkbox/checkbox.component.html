@@ -5,7 +5,12 @@
   <div class="select-container__body">
     <ng-container *ngFor="let item of items | filter: {field: bindLabel, value: search}; let i = index;">
       <div class="checkbox-option">
-        <input class="app-checkbox mr10" type="checkbox" [id]="item.id" [(ngModel)]="item.checked">
+        <ng-container *ngIf="options.single">
+            <input class="app-radio-checkbox mr10" type="radio" [id]="item.id" [(ngModel)]="checkedItem" [value]="item">
+        </ng-container>
+        <ng-container *ngIf="!options.single">
+            <input class="app-checkbox mr10" type="checkbox" [id]="item.id" [(ngModel)]="item.checked">
+        </ng-container>
         <img class="checkbox-image" [src]="item[options.imageUrlKey]" alt="{{item[bindLabel]}} image" *ngIf="options.image">
         <label class="checbox-label" [for]="item.id">{{ item[bindLabel] }}</label>
       </div>

@@ -5,7 +5,7 @@
   </h1>
   <button (click)="showCheckbox = !showCheckbox">Toggle Checkbox</button>
 <cm-select *ngIf="showCheckbox" [items]="items" [selected]="selected" [selectedIds]="selectedIds"
-[options]="{'filter': true}"
+[options]="{filter: true, single: true}"
 (changed)="onChange($event)" (idsChanged)="onIdsChanged($event)">
 </cm-select>
 </div>

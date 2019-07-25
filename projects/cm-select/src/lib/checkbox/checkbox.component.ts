@@ -20,6 +20,7 @@ export class CheckboxComponent implements OnInit  {
   @Output() idsChanged: EventEmitter<number[]> = new EventEmitter();
 
   search = '';
+  checkedItem: any;
 
   constructor() {
    }
@@ -57,17 +58,31 @@ export class CheckboxComponent implements OnInit  {
   }
 
   applySelections() {
-    this.selected = this.items.filter(i => i.checked);
+    if (this.options.single) {
+      this.selected = this.checkedItem;
+    } else {
+      this.selected = this.items.filter(i => i.checked);
+    }
     this.emitChange(this.selected);
   }
 
   emitChange(selected?) {
-    if (selected) {
-      this.changed.emit(this.selected);
-      this.idsChanged.emit(selected.map(i => i.id));
+    if (this.options.single) {
+      if (selected) {
+        this.changed.emit(this.selected);
+        this.idsChanged.emit(selected.id);
+      } else {
+        this.changed.emit(null);
+        this.idsChanged.emit(null);
+      }
     } else {
-      this.changed.emit([]);
-      this.idsChanged.emit([]);
+      if (selected) {
+        this.changed.emit(this.selected);
+        this.idsChanged.emit(selected.map(i => i.id));
+      } else {
+        this.changed.emit([]);
+        this.idsChanged.emit([]);
+      }
     }
   }
 
