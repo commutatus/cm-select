@@ -1,6 +1,6 @@
 {
   "name": "cm-select",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "scripts": {
     "build": "ng-packagr -p package.json",
     "postbuild": "cd dist && npm publish"
