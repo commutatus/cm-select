@@ -4,13 +4,15 @@ export class Options {
   imageUrlKey: string;
   single: boolean;
   top: number;
+  loadingText: string;
 
   constructor(option) {
     this.filter = option ? option.filter : false;
     this.image = option ? option.image : false;
     this.imageUrlKey = option ? option.imageUrl : null;
     this.single = option ? option.single : false;
-    this.filter = option ? option.top : 32;
+    this.top = option ? option.top : 32;
+    this.loadingText = option ? option.loadingText || 'Loading ...' : 'Loading...';
   }
 }
 

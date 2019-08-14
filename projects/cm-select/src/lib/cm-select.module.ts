@@ -6,7 +6,9 @@ import { CmSelectService } from './cm-select.service';
 
 
 @NgModule({
-  declarations: [CmSelectComponent],
+  declarations: [
+    CmSelectComponent,
+  ],
   imports: [
     CheckboxModule,
   ],

@@ -1,20 +1,26 @@
 <div class="checkbox-container select-container" [style.top.px]="options.top">
   <div class="select-container__header" *ngIf="options.filter">
-    <input class="search-input" type="text" [(ngModel)]="search" placeholder="Search">
+    <input libSearchInput class="search-input" type="text" [(ngModel)]="q" placeholder="Search" [text]="q" (inputChanged)="onSearch($event)">
   </div>
   <div class="select-container__body">
-    <ng-container *ngFor="let item of items | filter: {field: bindLabel, value: search}; let i = index;">
-      <div class="checkbox-option">
-        <ng-container *ngIf="options.single">
-            <input class="app-radio-checkbox mr10" type="radio" [id]="item.id" [(ngModel)]="checkedItem" [value]="item">
-        </ng-container>
-        <ng-container *ngIf="!options.single">
-            <input class="app-checkbox mr10" type="checkbox" [id]="item.id" [(ngModel)]="item.checked">
-        </ng-container>
-        <img class="checkbox-image" [src]="item[options.imageUrlKey]" [alt]="item[bindLabel] + ' image'" *ngIf="options.image">
-        <label class="checbox-label" [for]="item.id">{{ item[bindLabel] }}</label>
-      </div>
+    <ng-container *ngIf="!loading">
+      <ng-container *ngFor="let item of items | filter: {field: bindLabel, value: q}; let i = index;">
+        <div class="checkbox-option">
+          <ng-container *ngIf="options.single">
+              <input class="app-radio-checkbox mr10" type="radio" [id]="item.id" [(ngModel)]="checkedItem" [value]="item">
+          </ng-container>
+          <ng-container *ngIf="!options.single">
+              <input class="app-checkbox mr10" type="checkbox" [id]="item.id" [(ngModel)]="item.checked">
+          </ng-container>
+          <img class="checkbox-image" [src]="item[options.imageUrlKey]" [alt]="item[bindLabel] + ' image'" *ngIf="options.image">
+          <label class="checbox-label" [for]="item.id">{{ item[bindLabel] }}</label>
+        </div>
+      </ng-container>
     </ng-container>
+    <ng-container *ngIf="loading">
+      {{ options.loadingText }}
+    </ng-container>
+    
   </div>
   <div class="select-container__footer">
     <button class="app-btn transparent" (click)="clearSelections()">Clear</button>

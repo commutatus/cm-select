@@ -43,6 +43,10 @@ export class AppComponent implements OnInit {
     ];
   }
 
+  onSearch(event) {
+    console.log('event is: ', event);
+  }
+
   onChange(selectedItems) {
     console.log('new items are: ', JSON.parse(JSON.stringify(selectedItems)));
     this.selected = selectedItems;

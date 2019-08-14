@@ -10,22 +10,25 @@ import { deepCopyArray } from '../utils/helpers';
 })
 export class CheckboxComponent implements OnInit  {
 
-  @Input() options: Options = new Options(null);
+  @Input() options: Options;
   @Input() bindLabel = 'name';
   @Input() bindValue = 'id';
   @Input() items: ItemType[] = [];
+  @Input() loading = false;
   @Input() selected: ItemType[] = [];
   @Input() selectedIds: number[] = [];
+  @Output() search: EventEmitter<string> = new EventEmitter();
   @Output() changed: EventEmitter<ItemType[]> = new EventEmitter();
   @Output() idsChanged: EventEmitter<number[]> = new EventEmitter();
 
-  search = '';
+  q = '';
   checkedItem: any;
 
   constructor() {
    }
 
   ngOnInit() {
+    this.options = new Options(this.options);
     this.items = deepCopyArray(this.items);
     this.setSelectedItems();
   }
@@ -84,6 +87,10 @@ export class CheckboxComponent implements OnInit  {
         this.idsChanged.emit([]);
       }
     }
+  }
+
+  onSearch(q) {
+    this.search.emit(q);
   }
 
 }
