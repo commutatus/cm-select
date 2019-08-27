@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { ItemType } from '../models/classes';
 import { Options } from '../models/classes';
 import { deepCopyArray } from '../utils/helpers';
@@ -8,7 +8,7 @@ import { deepCopyArray } from '../utils/helpers';
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss']
 })
-export class CheckboxComponent implements OnInit  {
+export class CheckboxComponent implements OnInit, OnChanges  {
 
   @Input() options: Options;
   @Input() bindLabel = 'name';
@@ -31,6 +31,12 @@ export class CheckboxComponent implements OnInit  {
     this.options = new Options(this.options);
     this.items = deepCopyArray(this.items);
     this.setSelectedItems();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.items) {
+      this.setSelectedItems();
+    }
   }
 
   setSelectedItems() {
@@ -91,6 +97,10 @@ export class CheckboxComponent implements OnInit  {
 
   onSearch(q) {
     this.search.emit(q);
+  }
+
+  onItemChange() {
+    this.selected = this.items.filter(i => i.checked);
   }
 
 }
