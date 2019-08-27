@@ -7,10 +7,10 @@
       <ng-container *ngFor="let item of items | filter: {field: bindLabel, value: q}; let i = index;">
         <div class="checkbox-option">
           <ng-container *ngIf="options.single">
-              <input class="app-radio-checkbox mr10" type="radio" [id]="item.id" [(ngModel)]="checkedItem" [value]="item">
+            <input class="app-radio-checkbox mr10" type="radio" [id]="item.id" [(ngModel)]="checkedItem" [value]="item">
           </ng-container>
           <ng-container *ngIf="!options.single">
-              <input class="app-checkbox mr10" type="checkbox" [id]="item.id" [(ngModel)]="item.checked">
+            <input class="app-checkbox mr10" type="checkbox" [id]="item.id" [(ngModel)]="item.checked" (ngModelChange)="onItemChange()">
           </ng-container>
           <img class="checkbox-image" [src]="item[options.imageUrlKey]" [alt]="item[bindLabel] + ' image'" *ngIf="options.image">
           <label class="checbox-label" [for]="item.id">{{ item[bindLabel] }}</label>
@@ -20,7 +20,6 @@
     <ng-container *ngIf="loading">
       {{ options.loadingText }}
     </ng-container>
-    
   </div>
   <div class="select-container__footer">
     <button class="app-btn transparent" (click)="clearSelections()">Clear</button>
