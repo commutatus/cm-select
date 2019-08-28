@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, HostListener } from '@angular/core';
 import { ItemType } from '../models/classes';
 import { Options } from '../models/classes';
 import { deepCopyArray } from '../utils/helpers';
@@ -22,22 +22,46 @@ export class CheckboxComponent implements OnInit, OnChanges  {
   @Output() idsChanged: EventEmitter<number[]> = new EventEmitter();
   q = '';
   checkedItem: any;
-  removeDuplicates = newArray => [...new Set(newArray)];
+  tempSelected = [];
 
+
+  @HostListener('document:click', ['$event'])
+  clickedOutside(event) {
+    if (this.options.single) {
+      this.checkedItem = null;
+    } else  {
+      const selectedId = this.tempSelected.map(i => i.id);
+      this.items.forEach (
+        i => {
+          if (selectedId.includes(i.id)) {
+            i.checked = true;
+          } else if ('checked' in i) {
+            i.checked = false;
+          }
+        }
+      );
+      this.selected = [...this.tempSelected];
+    }
+
+  }
 
   constructor() {
-   }
+  }
 
   ngOnInit() {
     this.selected = [];
     this.options = new Options(this.options);
     this.items = deepCopyArray(this.items);
     this.setSelectedItems();
+    this.tempSelected = [...this.selected];
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.items) {
       this.setSelectedItems();
+    }
+    if (changes.selected && this.selected && this.selected.length > 1 ) {
+      this.tempSelected = [...this.selected];
     }
   }
 

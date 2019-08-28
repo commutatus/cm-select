@@ -1,4 +1,4 @@
-<div class="checkbox-container select-container" [style.top.px]="options.top">
+<div class="checkbox-container select-container" [style.top.px]="options.top" (click)="$event.stopPropagation();">
   <div class="select-container__header" *ngIf="options.filter">
     <input libSearchInput class="search-input" type="text" [(ngModel)]="q" placeholder="Search" [text]="q" (inputChanged)="onSearch($event)">
   </div>

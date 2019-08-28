@@ -62,7 +62,6 @@ export class AppComponent implements OnInit {
   }
 
   onIdsChanged(ids) {
-    console.log('Coming inside ids changed');
     console.log('new items are: ', JSON.parse(JSON.stringify(ids)));
     this.selectedIds = ids;
   }
