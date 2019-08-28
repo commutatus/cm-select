@@ -71,8 +71,6 @@ export class CheckboxComponent implements OnInit, OnChanges  {
   applySelections() {
     if (this.options.single) {
       this.selected = this.checkedItem;
-    } else {
-      this.selected = this.items.filter(i => i.checked);
     }
     this.emitChange(this.selected);
   }
