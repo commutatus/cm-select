@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, HostListener } from '@angular/core';
 import { ItemType } from '../models/classes';
 import { Options } from '../models/classes';
 import { deepCopyArray } from '../utils/helpers';
@@ -15,27 +15,53 @@ export class CheckboxComponent implements OnInit, OnChanges  {
   @Input() bindValue = 'id';
   @Input() items: ItemType[] = [];
   @Input() loading = false;
-  @Input() selected: ItemType[] = [];
+  @Input() selected: ItemType[]  = [];
   @Input() selectedIds: number[] = [];
   @Output() search: EventEmitter<string> = new EventEmitter();
   @Output() changed: EventEmitter<ItemType[]> = new EventEmitter();
   @Output() idsChanged: EventEmitter<number[]> = new EventEmitter();
-
   q = '';
   checkedItem: any;
+  tempSelected = [];
+
+
+  @HostListener('document:click', ['$event'])
+  clickedOutside(event) {
+    if (this.options.single) {
+      this.checkedItem = null;
+    } else  {
+      const selectedId = this.tempSelected.map(i => i.id);
+      this.items.forEach (
+        i => {
+          if (selectedId.includes(i.id)) {
+            i.checked = true;
+          } else if ('checked' in i) {
+            i.checked = false;
+          }
+        }
+      );
+      this.selected = [...this.tempSelected];
+    }
+
+  }
 
   constructor() {
-   }
+  }
 
   ngOnInit() {
+    this.selected = [];
     this.options = new Options(this.options);
     this.items = deepCopyArray(this.items);
     this.setSelectedItems();
+    this.tempSelected = [...this.selected];
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.items) {
       this.setSelectedItems();
+    }
+    if (changes.selected && this.selected && this.selected.length > 1 ) {
+      this.tempSelected = [...this.selected];
     }
   }
 
@@ -69,8 +95,6 @@ export class CheckboxComponent implements OnInit, OnChanges  {
   applySelections() {
     if (this.options.single) {
       this.selected = this.checkedItem;
-    } else {
-      this.selected = this.items.filter(i => i.checked);
     }
     this.emitChange(this.selected);
   }
@@ -99,8 +123,17 @@ export class CheckboxComponent implements OnInit, OnChanges  {
     this.search.emit(q);
   }
 
-  onItemChange() {
-    this.selected = this.items.filter(i => i.checked);
+  onItemChange(item) {
+    if (item.checked) {
+      this.selected.push(item);
+    } else {
+      this.selected = this.selected.filter(i => i.id !== item.id);
+    }
+    this.selected = this.selected.filter((thing, index) => {
+      return index === this.selected.findIndex(obj => {
+        return JSON.stringify(obj) === JSON.stringify(thing);
+      });
+    });
   }
 
 }
