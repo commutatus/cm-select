@@ -15,19 +15,21 @@ export class CheckboxComponent implements OnInit, OnChanges  {
   @Input() bindValue = 'id';
   @Input() items: ItemType[] = [];
   @Input() loading = false;
-  @Input() selected: ItemType[] = [];
+  @Input() selected: ItemType[]  = [];
   @Input() selectedIds: number[] = [];
   @Output() search: EventEmitter<string> = new EventEmitter();
   @Output() changed: EventEmitter<ItemType[]> = new EventEmitter();
   @Output() idsChanged: EventEmitter<number[]> = new EventEmitter();
-
   q = '';
   checkedItem: any;
+  removeDuplicates = newArray => [...new Set(newArray)];
+
 
   constructor() {
    }
 
   ngOnInit() {
+    this.selected = [];
     this.options = new Options(this.options);
     this.items = deepCopyArray(this.items);
     this.setSelectedItems();
@@ -99,8 +101,17 @@ export class CheckboxComponent implements OnInit, OnChanges  {
     this.search.emit(q);
   }
 
-  onItemChange() {
-    this.selected = this.items.filter(i => i.checked);
+  onItemChange(item) {
+    if (item.checked) {
+      this.selected.push(item);
+    } else {
+      this.selected = this.selected.filter(i => i.id !== item.id);
+    }
+    this.selected = this.selected.filter((thing, index) => {
+      return index === this.selected.findIndex(obj => {
+        return JSON.stringify(obj) === JSON.stringify(thing);
+      });
+    });
   }
 
 }

@@ -10,7 +10,7 @@
             <input class="app-radio-checkbox mr10" type="radio" [id]="item.id" [(ngModel)]="checkedItem" [value]="item">
           </ng-container>
           <ng-container *ngIf="!options.single">
-            <input class="app-checkbox mr10" type="checkbox" [id]="item.id" [(ngModel)]="item.checked" (ngModelChange)="onItemChange()">
+            <input class="app-checkbox mr10" type="checkbox" [id]="item.id" [(ngModel)]="item.checked" (ngModelChange)="onItemChange(item)">
           </ng-container>
           <img class="checkbox-image" [src]="item[options.imageUrlKey]" [alt]="item[bindLabel] + ' image'" *ngIf="options.image">
           <label class="checbox-label" [for]="item.id">{{ item[bindLabel] }}</label>
