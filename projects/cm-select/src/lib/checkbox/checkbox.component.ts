@@ -42,7 +42,6 @@ export class CheckboxComponent implements OnInit, OnChanges  {
       );
       this.selected = [...this.tempSelected];
     }
-
   }
 
   constructor() {
@@ -66,6 +65,7 @@ export class CheckboxComponent implements OnInit, OnChanges  {
   }
 
   setSelectedItems() {
+    this.items = deepCopyArray(this.items);
     if (this.selected && this.selected.length) {
       this.selected.forEach(s => {
         for (const item of this.items) {
@@ -88,6 +88,7 @@ export class CheckboxComponent implements OnInit, OnChanges  {
   }
 
   clearSelections() {
+    this.tempSelected = [];
     this.items.forEach(i => i.checked = false);
     this.emitChange();
   }

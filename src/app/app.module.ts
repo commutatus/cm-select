@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CmSelectModule } from 'projects/cm-select/src/public_api';
 
@@ -11,6 +11,7 @@ import { CmSelectModule } from 'projects/cm-select/src/public_api';
   imports: [
     BrowserModule,
     CmSelectModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
