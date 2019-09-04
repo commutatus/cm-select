@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
   items: any[];
@@ -11,8 +12,12 @@ export class AppComponent implements OnInit {
   showCheckbox = true;
   selected: any[];
   selectedIds: number[];
+  selected1: any[];
+  selectedIds1: number[];
 
-  constructor() {}
+  constructor(
+    private http: HttpClient
+  ) {}
 
   ngOnInit() {
     this.items = [
