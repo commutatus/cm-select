@@ -4,9 +4,19 @@
     Welcome to {{ title }}!
   </h1>
   <button (click)="showCheckbox = !showCheckbox">Toggle Checkbox</button>
-<cm-select *ngIf="showCheckbox" [items]="items" [selected]="selected" [selectedIds]="selectedIds"
-[options]="{'filter': true}"
-(changed)="onChange($event)" (idsChanged)="onIdsChanged($event)">
-</cm-select>
+  <div class="my-flex">
+    <div class="child-1">
+      <cm-select *ngIf="showCheckbox" [items]="items" [selected]="selected" [selectedIds]="selectedIds"
+      [options]="{filter: true}" [loading]="false"
+      (search)="onSearch($event)" (changed)="onChange($event)" (idsChanged)="onIdsChanged($event)">
+      </cm-select>
+    </div>
+    <div class="child-2">
+      <cm-select *ngIf="showCheckbox" [items]="items" [selected]="selected1" [selectedIds]="selectedIds1"
+        [options]="{filter: true}" [loading]="false"
+        (search)="onSearch($event)" (changed)="onChange($event)" (idsChanged)="onIdsChanged($event)">
+      </cm-select>
+    </div>
+  </div>
 </div>
 

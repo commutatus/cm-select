@@ -9,18 +9,22 @@ import { Options } from './models/classes';
 })
 export class CmSelectComponent implements OnInit {
 
-  @Input() options: Options = new Options(null);
+  @Input() options: Options;
   @Input() bindLabel = 'name';
   @Input() bindValue = 'id';
   @Input() items: ItemType[] = [];
   @Input() selected: ItemType[] = [];
   @Input() selectedIds: number[] = [];
+  @Input() loading = false;
+  @Output() search: EventEmitter<string> = new EventEmitter();
   @Output() changed: EventEmitter<ItemType[]> = new EventEmitter();
   @Output() idsChanged: EventEmitter<number[]> = new EventEmitter();
 
-  constructor() { }
+  constructor() {
+   }
 
   ngOnInit() {
+    this.options = new Options(this.options);
   }
 
   onChange(items)  {
@@ -29,6 +33,10 @@ export class CmSelectComponent implements OnInit {
 
   onIdsChanged(items) {
     this.idsChanged.emit(items);
+  }
+
+  onSearch(event) {
+    this.search.emit(event);
   }
 
 

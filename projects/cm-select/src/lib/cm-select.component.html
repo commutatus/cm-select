@@ -1,3 +1,4 @@
 <cm-select-checkbox [items]="items" [bindLabel]="bindLabel" [bindValue]="bindValue" [options]="options"
-  [selected]="selected" [selectedIds]="selectedIds" (changed)="onChange($event)" (idsChanged)="onIdsChanged($event)">
+  [selected]="selected" [selectedIds]="selectedIds" [loading]="loading" (search)="onSearch($event)"
+  (changed)="onChange($event)" (idsChanged)="onIdsChanged($event)">
 </cm-select-checkbox>
