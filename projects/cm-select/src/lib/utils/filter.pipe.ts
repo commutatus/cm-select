@@ -9,15 +9,16 @@ export class FilterPipe implements PipeTransform {
     if (!items || !filter || !filter.value) {
       return items;
     }
+
     if (filter.field) {
       try {
-        return items.filter(item => item[filter.field].toLowerCase().includes(filter.value));
+        return items.filter(item => item[filter.field].toLowerCase().includes(filter.value.toLowerCase()));
       } catch (e) {
         return null;
       }
     } else {
       try {
-        return items.filter(item => item.toLowerCase().includes(filter.value));
+        return items.filter(item => item.toLowerCase().includes(filter.value.toLowerCase()));
       } catch (e) {
         return null;
       }

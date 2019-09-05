@@ -61,7 +61,7 @@ export class CheckboxComponent implements OnInit  {
     this.emitChange(this.selected);
   }
 
-  emitChange(selected?) {
+  emitChange(selected?: any) {
     if (selected) {
       this.changed.emit(this.selected);
       this.idsChanged.emit(selected.map(i => i.id));
