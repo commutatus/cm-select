@@ -20,6 +20,7 @@ export class CheckboxComponent implements OnInit, OnChanges  {
   @Output() search: EventEmitter<string> = new EventEmitter();
   @Output() changed: EventEmitter<ItemType[]> = new EventEmitter();
   @Output() idsChanged: EventEmitter<number[]> = new EventEmitter();
+  oldSelected: any;
   q = '';
   checkedItem: any;
   tempSelected = [];
@@ -48,6 +49,10 @@ export class CheckboxComponent implements OnInit, OnChanges  {
   }
 
   ngOnInit() {
+    this.oldSelected = this.selected;
+    this.oldSelected.forEach(ele => {
+      ele.checked = true;
+    });
     this.selected = [];
     this.options = new Options(this.options);
     this.items = deepCopyArray(this.items);
@@ -90,6 +95,7 @@ export class CheckboxComponent implements OnInit, OnChanges  {
   clearSelections() {
     this.tempSelected = [];
     this.items.forEach(i => i.checked = false);
+    this.selected = [];
     this.emitChange();
   }
 
@@ -110,9 +116,18 @@ export class CheckboxComponent implements OnInit, OnChanges  {
         this.idsChanged.emit(null);
       }
     } else {
-      if (selected) {
+      if (this.oldSelected.length > 0) {
+        this.selected = [...this.selected, ...this.oldSelected];
+        this.selected = this.selected.filter((thing, index) => {
+          return index === this.selected.findIndex(obj => {
+            return JSON.stringify(obj) === JSON.stringify(thing);
+          });
+        });
+        this.oldSelected = [];
+      }
+      if (this.selected) {
         this.changed.emit(this.selected);
-        this.idsChanged.emit(selected.map(i => i.id));
+        this.idsChanged.emit(this.selected.map(i => +i.id));
       } else {
         this.changed.emit([]);
         this.idsChanged.emit([]);
