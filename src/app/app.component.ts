@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   items: any[];
   title = 'cm-select-app';
   showCheckbox = true;
-  selected: any[] = [];
+  selected: any[];
   selectedIds: number[];
   selected1: any[];
   selectedIds1: number[];
