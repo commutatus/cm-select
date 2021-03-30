@@ -20,9 +20,12 @@ export class CheckboxComponent implements OnInit, OnChanges  {
   @Output() search: EventEmitter<string> = new EventEmitter();
   @Output() changed: EventEmitter<ItemType[]> = new EventEmitter();
   @Output() idsChanged: EventEmitter<number[]> = new EventEmitter();
+  @Output() selection: EventEmitter<ItemType[]> = new EventEmitter();
+  @Output() idsSelection: EventEmitter<number[]> = new EventEmitter();
   q = '';
   checkedItem: any;
   tempSelected = [];
+  newSelected = [];
 
 
   @HostListener('document:click', ['$event'])
@@ -48,11 +51,14 @@ export class CheckboxComponent implements OnInit, OnChanges  {
   }
 
   ngOnInit() {
-    this.selected = [];
+
     this.options = new Options(this.options);
     this.items = deepCopyArray(this.items);
     this.setSelectedItems();
-    this.tempSelected = [...this.selected];
+    this.newSelected = [];
+    if (this.selected) {
+      this.tempSelected = [...this.selected];
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -61,12 +67,13 @@ export class CheckboxComponent implements OnInit, OnChanges  {
     }
     if (changes.selected && this.selected && this.selected.length > 1 ) {
       this.tempSelected = [...this.selected];
+      this.newSelected = JSON.parse(JSON.stringify(this.selected));
     }
   }
 
   setSelectedItems() {
     this.items = deepCopyArray(this.items);
-    if (this.selected && this.selected.length) {
+    if (this.selected && this.selected.length > 0) {
       this.selected.forEach(s => {
         for (const item of this.items) {
           if (item.id === s.id) {
@@ -75,11 +82,12 @@ export class CheckboxComponent implements OnInit, OnChanges  {
           }
         }
       });
-    } else if (this.selectedIds && this.selectedIds.length) {
+    } else if (this.selectedIds && this.selectedIds.length > 0) {
       this.selectedIds.forEach(id => {
         for (const item of this.items) {
           if (item.id === id) {
             item.checked = true;
+            this.selected.push(item);
             break;
           }
         }
@@ -90,6 +98,8 @@ export class CheckboxComponent implements OnInit, OnChanges  {
   clearSelections() {
     this.tempSelected = [];
     this.items.forEach(i => i.checked = false);
+    this.selected = [];
+    this.newSelected = [];
     this.emitChange();
   }
 
@@ -109,14 +119,29 @@ export class CheckboxComponent implements OnInit, OnChanges  {
         this.changed.emit(null);
         this.idsChanged.emit(null);
       }
+      if (this.selected) {
+        this.selection.emit(this.selected);
+        this.idsSelection.emit(this.selected.map(i => +i.id));
+      } else {
+        this.selection.emit(null);
+        this.idsSelection.emit(null);
+      }
     } else {
-      if (selected) {
-        this.changed.emit(this.selected);
-        this.idsChanged.emit(selected.map(i => i.id));
+      if (this.newSelected) {
+        this.changed.emit(this.newSelected);
+        this.idsChanged.emit(this.newSelected.map(i => +i.id));
       } else {
         this.changed.emit([]);
         this.idsChanged.emit([]);
       }
+      if (this.selected) {
+        this.selection.emit(this.selected);
+        this.idsSelection.emit(this.selected.map(i => +i.id));
+      } else {
+        this.selection.emit([]);
+        this.idsSelection.emit([]);
+      }
+      this.newSelected = JSON.parse(JSON.stringify(this.selected));
     }
   }
 
@@ -126,12 +151,22 @@ export class CheckboxComponent implements OnInit, OnChanges  {
 
   onItemChange(item) {
     if (item.checked) {
+      if (!(this.selected && this.selected.length > 0)) {
+        this.selected = [];
+      }
       this.selected.push(item);
+      this.newSelected.push(item);
     } else {
       this.selected = this.selected.filter(i => i.id !== item.id);
+      this.newSelected = this.newSelected.filter(i => i.id !== item.id);
     }
     this.selected = this.selected.filter((thing, index) => {
       return index === this.selected.findIndex(obj => {
+        return JSON.stringify(obj) === JSON.stringify(thing);
+      });
+    });
+    this.newSelected = this.newSelected.filter((thing, index) => {
+      return index === this.newSelected.findIndex(obj => {
         return JSON.stringify(obj) === JSON.stringify(thing);
       });
     });
