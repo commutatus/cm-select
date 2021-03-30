@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   title = 'cm-select-app';
   showCheckbox = true;
   selected: any[];
-  selectedIds: number[];
+  selectedIds: number[] ;
   selected1: any[];
   selectedIds1: number[];
 
@@ -46,6 +46,7 @@ export class AppComponent implements OnInit {
       {id: 23, name: 'chikku'},
       {id: 24, name: 'kiwi'},
     ];
+    this.selectedIds = [1, 2, 3];
   }
 
   onSearch(event) {

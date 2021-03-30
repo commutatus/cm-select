@@ -73,7 +73,7 @@ export class CheckboxComponent implements OnInit, OnChanges  {
 
   setSelectedItems() {
     this.items = deepCopyArray(this.items);
-    if (this.selected && this.selected.length) {
+    if (this.selected && this.selected.length > 0) {
       this.selected.forEach(s => {
         for (const item of this.items) {
           if (item.id === s.id) {
@@ -82,11 +82,12 @@ export class CheckboxComponent implements OnInit, OnChanges  {
           }
         }
       });
-    } else if (this.selectedIds && this.selectedIds.length) {
+    } else if (this.selectedIds && this.selectedIds.length > 0) {
       this.selectedIds.forEach(id => {
         for (const item of this.items) {
           if (item.id === id) {
             item.checked = true;
+            this.selected.push(item);
             break;
           }
         }
@@ -140,8 +141,8 @@ export class CheckboxComponent implements OnInit, OnChanges  {
         this.selection.emit([]);
         this.idsSelection.emit([]);
       }
+      this.newSelected = JSON.parse(JSON.stringify(this.selected));
     }
-    this.newSelected = JSON.parse(JSON.stringify(this.selected));
   }
 
   onSearch(q) {
