@@ -49,7 +49,6 @@ export class AppComponent implements OnInit {
   }
 
   onSearch(event) {
-    console.log('event is: ', event);
     if (event) {
       this.items = [
         {id: 20, name: 'lemon'},
@@ -63,12 +62,19 @@ export class AppComponent implements OnInit {
 
   onChange(selectedItems) {
     console.log('new items are: ', JSON.parse(JSON.stringify(selectedItems)));
-    this.selected = selectedItems;
   }
 
   onIdsChanged(ids) {
     console.log('new items are: ', JSON.parse(JSON.stringify(ids)));
-    this.selectedIds = ids;
   }
+
+  onSelection(event) {
+    this.selected = event;
+  }
+
+  onIdsSelection(event) {
+    this.selectedIds = event;
+  }
+
 
 }

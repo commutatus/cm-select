@@ -19,6 +19,8 @@ export class CmSelectComponent implements OnInit {
   @Output() search: EventEmitter<string> = new EventEmitter();
   @Output() changed: EventEmitter<ItemType[]> = new EventEmitter();
   @Output() idsChanged: EventEmitter<number[]> = new EventEmitter();
+  @Output() selection: EventEmitter<ItemType[]> = new EventEmitter();
+  @Output() idsSelection: EventEmitter<number[]> = new EventEmitter();
 
   constructor() {
    }
@@ -39,5 +41,12 @@ export class CmSelectComponent implements OnInit {
     this.search.emit(event);
   }
 
+  onSelection(event) {
+    this.selection.emit(event);
+  }
+
+  onSelectionChanged(event) {
+    this.idsSelection.emit(event);
+  }
 
 }
